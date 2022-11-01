@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -54,52 +52,22 @@ class _MainScreenState extends State<MainScreen> {
               const SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  InkWell(
-                    onTap: () => print('Call Map Screen (Jalal)'),
-                    child: Container(
-                      child: const Text('Button 1'),
-                      width: 60,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      decoration: const ShapeDecoration(
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4))),
-                          color: Colors.blue),
-                    ),
+              InkWell(
+                child: Container(
+                  child: const Text(
+                    'Aufnehmen',
                   ),
-                  InkWell(
-                    onTap: () => print('Call Sensors Screen (Shyiar)'),
-                    child: Container(
-                      child: const Text('Button 2'),
-                      width: 60,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      decoration: const ShapeDecoration(
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4))),
-                          color: Colors.blue),
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  decoration: const ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
                     ),
+                    color: Colors.blue,
                   ),
-                  InkWell(
-                    onTap: () => print('Button 3 gedrückt'),
-                    child: Container(
-                      child: const Text('Button 3'),
-                      width: 60,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      decoration: const ShapeDecoration(
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4))),
-                          color: Colors.blue),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 30,
+                ),
+                onTap: () => print('Aufnehmen'),
               ),
             ],
           ),

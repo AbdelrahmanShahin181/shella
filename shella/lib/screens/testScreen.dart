@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shella/screens/mainScreen.dart';
 
 class TestScreen extends StatelessWidget {
   const TestScreen({super.key});
@@ -26,10 +27,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
+    MainScreen(),
     Text(
       'Index 1: Business',
       style: optionStyle,
@@ -62,12 +60,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.edgesensor_high),
+            label: 'ACC',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.gps_fixed),
+            label: 'GPS',
           ),
         ],
         currentIndex: _selectedIndex,
