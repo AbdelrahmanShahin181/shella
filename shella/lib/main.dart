@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shella/screens/mainScreen.dart';
-import 'package:shella/screens/testScreen.dart';
+import 'package:shella/screens/main_screen.dart';
+import 'package:shella/screens/test_screen.dart';
 
 import 'screens/gyroscopeSensorScreen.dart';
 
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const GyroscopeSensorScreen(),
+      home: const MovementSensorsScreen(),
     );
   }
 }

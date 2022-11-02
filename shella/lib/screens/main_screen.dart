@@ -1,5 +1,3 @@
-// ignore_for_file: library_private_types_in_public_api, sized_box_for_whitespace, sort_child_properties_last, avoid_print, non_constant_identifier_names
-
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
