@@ -2,20 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:shella/screens/NavigationScreen.dart';
 
-import 'package:shella/screens/googleMape.dart';
-
 void main() {
-  //runApp(MyApp());
-  runApp(GoogleApp());
-}
-
-class GoogleApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Home(),
-    );
-  }
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

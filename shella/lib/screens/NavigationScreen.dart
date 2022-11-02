@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shella/screens/GyroscopeSensorScreen.dart';
 import 'package:shella/screens/HomeScreen.dart';
+import 'package:shella/screens/GoogleMapScreen.dart';
 
 class NavigationScreen extends StatelessWidget {
   const NavigationScreen({super.key});
@@ -30,10 +31,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     MovementSensorsScreen(),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    GoogleMapScreen(),
   ];
 
   void _onItemTapped(int index) {

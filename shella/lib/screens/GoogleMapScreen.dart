@@ -7,12 +7,13 @@ import 'package:geolocator/geolocator.dart' as geo;
 //import 'package:geolocator/geolocator.dart';
 //import 'package:geolocation/geolocation.dart';
 
-class Home extends StatefulWidget {
+class GoogleMapScreen extends StatefulWidget {
+  const GoogleMapScreen({super.key});
   @override
-  _HomeState createState() => _HomeState();
+  _GoogleMapScreenState createState() => _GoogleMapScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _GoogleMapScreenState extends State<GoogleMapScreen> {
   //geo.Position? _currentPosition;
   String myAdress = 'My adress';
   var _currentPosition;
