@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:shella/screens/NavigationScreen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
