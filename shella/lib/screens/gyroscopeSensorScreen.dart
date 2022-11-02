@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, library_private_types_in_public_api, avoid_print, file_names
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
@@ -11,6 +12,8 @@ class MovementSensorsScreen extends StatefulWidget {
 }
 
 class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
+  final database = FirebaseDatabase.instance.ref();
+
   double x = 0, y = 0, z = 0;
   String rotationXAxis = "none";
   String rotationYAxis = "none";
@@ -23,8 +26,6 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
   @override
   void initState() {
     gyroscopeEvents.listen((GyroscopeEvent event) {
-      //print(event);
-
       x = event.x;
       y = event.y;
       z = event.z;
@@ -76,6 +77,8 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final sensorsRef = database.child('sensors/');
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Gyroscope/Accelerometer Sensor in Flutter"),
@@ -130,11 +133,40 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
           Text(
             directionZ,
             style: TextStyle(fontSize: 15),
+          ),
+          InkWell(
+            child: Container(
+              width: double.infinity,
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              decoration: const ShapeDecoration(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                ),
+                color: Colors.blue,
+              ),
+              child: const Text(
+                'Save to db',
+              ),
+            ),
+            onTap: () async {
+              try {
+                await sensorsRef.set({
+                  "rotationX": rotationXAxis,
+                  "rotationY": rotationYAxis,
+                  "rotationZ": rotationZAxis,
+                });
+              } catch (error) {
+                print('there has been an error $error');
+              }
+            },
           )
         ]),
       ]),
     );
   }
+
+  Future createData() async {}
 }
 
 class LiveData {
