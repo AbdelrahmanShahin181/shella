@@ -16,7 +16,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
   static const List<Widget> _widgetOptions = [
     HomeScreen(),
     MovementSensorsScreen(),
-    MapScreen(),
+    GoogleMapScreen(),
   ];
 
   void _onItemTapped(int index) {

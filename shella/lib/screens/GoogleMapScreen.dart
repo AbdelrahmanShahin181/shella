@@ -1,18 +1,22 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+//import 'package:geolocation/geolocation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart' as geo;
+//import 'package:geolocator/geolocator.dart';
+//import 'package:geolocation/geolocation.dart';
 
-class MapScreen extends StatefulWidget {
-  const MapScreen({Key? key}) : super(key: key);
-
+class GoogleMapScreen extends StatefulWidget {
+  const GoogleMapScreen({super.key});
   @override
-  _MapScreenState createState() => _MapScreenState();
+  _GoogleMapScreenState createState() => _GoogleMapScreenState();
 }
 
-class _MapScreenState extends State<MapScreen> {
+class _GoogleMapScreenState extends State<GoogleMapScreen> {
+  //geo.Position? _currentPosition;
   String myAdress = 'My adress';
   var _currentPosition;
 
@@ -81,16 +85,10 @@ class _MapScreenState extends State<MapScreen> {
           ),
           Center(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(myAdress),
-                TextButton(
-                    onPressed: () async {
-                      _currentPosition = await _determinePosition();
-                      // _currentPosition = await geLatAndLong();
-                      print(_currentPosition.latitude);
-                      print(_currentPosition.longitude);
-                    },
-                    child: const Text('Locate Me')),
+
                 //Text('Latitude: ' + _currentPosition?.latitude.toString()),
 
                 _currentPosition != null
@@ -100,6 +98,28 @@ class _MapScreenState extends State<MapScreen> {
                     ? Text(
                         'longitude =' + _currentPosition.longitude.toString())
                     : Container(),
+                _currentPosition != null
+                    ? Text('altitude =' + _currentPosition.altitude.toString())
+                    : Container(),
+                _currentPosition != null
+                    ? Text('accuracy =' + _currentPosition.accuracy.toString())
+                    : Container(),
+
+                _currentPosition != null
+                    ? Text('speed =' + _currentPosition.speed.toString())
+                    : Container(),
+                //_currentPosition != null ? Text('speedAccuracy =' + _currentPosition.speedAccuracy.toString()) : Container(),
+                _currentPosition != null
+                    ? Text('heading =' + _currentPosition.heading.toString())
+                    : Container(),
+                TextButton(
+                    onPressed: () async {
+                      _currentPosition = await _determinePosition();
+                      // _currentPosition = await geLatAndLong();
+                      print(_currentPosition.latitude);
+                      print(_currentPosition.longitude);
+                    },
+                    child: const Text('Locate Me')),
               ],
             ),
           ),
