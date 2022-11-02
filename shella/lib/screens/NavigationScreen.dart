@@ -1,37 +1,22 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shella/screens/GyroscopeSensorScreen.dart';
 import 'package:shella/screens/HomeScreen.dart';
 import 'package:shella/screens/GoogleMapScreen.dart';
 
-class NavigationScreen extends StatelessWidget {
+class NavigationScreen extends StatefulWidget {
   const NavigationScreen({super.key});
 
-  static const String _title = 'Flutter Code Sample';
-
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: _title,
-      home: MyStatefulWidget(),
-    );
-  }
+  State<NavigationScreen> createState() => _NavigationScreenState();
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({super.key});
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _NavigationScreenState extends State<NavigationScreen> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
+  static const List<Widget> _widgetOptions = [
     HomeScreen(),
     MovementSensorsScreen(),
-    GoogleMapScreen(),
+    MapScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -44,7 +29,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
+        title: const Text('Shella'),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),

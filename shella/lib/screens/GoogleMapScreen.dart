@@ -1,22 +1,18 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
-//import 'package:geolocation/geolocation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart' as geo;
-//import 'package:geolocator/geolocator.dart';
-//import 'package:geolocation/geolocation.dart';
 
-class GoogleMapScreen extends StatefulWidget {
-  const GoogleMapScreen({super.key});
+class MapScreen extends StatefulWidget {
+  const MapScreen({Key? key}) : super(key: key);
+
   @override
-  _GoogleMapScreenState createState() => _GoogleMapScreenState();
+  _MapScreenState createState() => _MapScreenState();
 }
 
-class _GoogleMapScreenState extends State<GoogleMapScreen> {
-  //geo.Position? _currentPosition;
+class _MapScreenState extends State<MapScreen> {
   String myAdress = 'My adress';
   var _currentPosition;
 
