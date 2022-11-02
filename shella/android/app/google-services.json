@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "558554955832",
+    "project_id": "shella-c90d1",
+    "storage_bucket": "shella-c90d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558554955832:android:f1e393a712fc87d656a6cd",
+        "android_client_info": {
+          "package_name": "com.example.shella"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558554955832-hrf9l6nja9rplk6vk87sabqi5i7t03dq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWA1YsxX2bootAa2ku2WK76eLMXq_zRmY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558554955832-hrf9l6nja9rplk6vk87sabqi5i7t03dq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
