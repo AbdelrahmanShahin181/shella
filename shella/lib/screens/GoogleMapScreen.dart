@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api, prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 //import 'package:geolocation/geolocation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -66,13 +68,13 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Google Maps'),
+        title: const Text('Google Maps'),
       ),
       body: ListView(
         children: [
           Container(
             height: 400,
-            child: GoogleMap(
+            child: const GoogleMap(
               //GoogleMap
               myLocationEnabled: true,
               initialCameraPosition: CameraPosition(
@@ -92,7 +94,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                       print(_currentPosition.latitude);
                       print(_currentPosition.longitude);
                     },
-                    child: Text('Locate Me')),
+                    child: const Text('Locate Me')),
                 //Text('Latitude: ' + _currentPosition?.latitude.toString()),
 
                 _currentPosition != null
