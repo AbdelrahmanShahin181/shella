@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
-<<<<<<< Updated upstream
-import 'package:shella/screens/mainScreen.dart';
-import 'package:shella/screens/testScreen.dart';
-=======
+
 import 'package:shella/screens/NavigationScreen.dart';
->>>>>>> Stashed changes
+
+import 'package:shella/screens/googleMape.dart';
 
 void main() {
-  runApp(const MyApp());
+  //runApp(MyApp());
+  runApp(GoogleApp());
+}
+
+class GoogleApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Home(),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -22,11 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-<<<<<<< Updated upstream
-      home: const TestScreen(),
-=======
       home: const NavigationScreen(),
->>>>>>> Stashed changes
     );
   }
 }

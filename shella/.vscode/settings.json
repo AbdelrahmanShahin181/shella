@@ -1,0 +1,20 @@
+{
+    "background.enabled": false,
+    "background.loop": false,
+    "background.useDefault": false,
+    "background.useFront": false,
+    "background.style": {
+        "content": "''",
+        "pointer-events": "none",
+        "position": "absolute",
+        "z-index": "99999",
+        "width": "70%",
+        "height": "100%",
+        "background-position": "100% 100%",
+        "background-repeat": "no-repeat",
+        "opacity": 1
+    },
+    "background.customImages": [
+        "M:\\jalal.jpg",
+    ]
+}
