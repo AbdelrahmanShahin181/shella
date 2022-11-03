@@ -14,23 +14,17 @@ class MovementSensorsScreen extends StatefulWidget {
 class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
   final database = FirebaseDatabase.instance.ref();
 
-  double x = 0, y = 0, z = 0;
-  String rotationXAxis = "none";
-  String rotationYAxis = "none";
-  String rotationZAxis = "none";
-
-  String directionX = "none";
-  String directionY = "none";
-  String directionZ = "none";
+  double rotationXAxis = 0, rotationYAxis = 0, rotationZAxis = 0;
+  double directionX = 0, directionY = 0, directionZ = 0;
 
   @override
   void initState() {
     gyroscopeEvents.listen((GyroscopeEvent event) {
-      x = event.x;
-      y = event.y;
-      z = event.z;
+      rotationXAxis = event.x;
+      rotationYAxis = event.y;
+      rotationZAxis = event.z;
 
-      if (x > 0) {
+      /*if (x > 0) {
         rotationXAxis = "up and forward";
       } else if (x < 0) {
         rotationXAxis = "down and backward";
@@ -44,17 +38,17 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
         rotationZAxis = "rotation z axis minus";
       } else if (z > 0) {
         rotationZAxis = "rotation z axis plus";
-      }
+      }*/
 
       setState(() {});
     });
 
     userAccelerometerEvents.listen((event) {
-      x = event.x; // right minus left plus
-      y = event.y; // back plus front minus
-      z = event.z; // down plus up minus
+      directionX = event.x; // right minus left plus
+      directionY = event.y; // back plus front minus
+      directionZ = event.z; // down plus up minus
 
-      if (x > 0) {
+      /*if (x > 0) {
         directionX = "going left";
       } else if (x < 0) {
         directionX = "going right";
@@ -69,7 +63,7 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
       } else if (z > 0) {
         directionZ = "going down";
       }
-
+*/
       setState(() {});
     });
     super.initState();
@@ -91,7 +85,7 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Text(
-            rotationXAxis,
+            rotationXAxis.toString(),
             style: TextStyle(fontSize: 15),
           ),
           Text(
@@ -99,7 +93,7 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Text(
-            rotationYAxis,
+            rotationYAxis.toString(),
             style: TextStyle(fontSize: 15),
           ),
           Text(
@@ -107,7 +101,7 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Text(
-            rotationZAxis,
+            rotationZAxis.toString(),
             style: TextStyle(fontSize: 15),
           ),
           Text(
@@ -115,7 +109,7 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Text(
-            directionX,
+            directionX.toString(),
             style: TextStyle(fontSize: 15),
           ),
           Text(
@@ -123,7 +117,7 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Text(
-            directionY,
+            directionY.toString(),
             style: TextStyle(fontSize: 15),
           ),
           Text(
@@ -131,7 +125,7 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Text(
-            directionZ,
+            directionZ.toString(),
             style: TextStyle(fontSize: 15),
           ),
           InkWell(
