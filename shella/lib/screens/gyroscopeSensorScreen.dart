@@ -24,22 +24,6 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
       rotationYAxis = event.y;
       rotationZAxis = event.z;
 
-      /*if (x > 0) {
-        rotationXAxis = "up and forward";
-      } else if (x < 0) {
-        rotationXAxis = "down and backward";
-      }
-      if (y > 0) {
-        rotationYAxis = "turn left";
-      } else if (y < 0) {
-        rotationYAxis = "turn right";
-      }
-      if (z < 0) {
-        rotationZAxis = "rotation z axis minus";
-      } else if (z > 0) {
-        rotationZAxis = "rotation z axis plus";
-      }*/
-
       setState(() {});
     });
 
@@ -48,22 +32,6 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
       directionY = event.y; // back plus front minus
       directionZ = event.z; // down plus up minus
 
-      /*if (x > 0) {
-        directionX = "going left";
-      } else if (x < 0) {
-        directionX = "going right";
-      }
-      if (y > 0) {
-        directionY = "going backward";
-      } else if (y < 0) {
-        directionY = "going forward";
-      }
-      if (z < 0) {
-        directionZ = "going up";
-      } else if (z > 0) {
-        directionZ = "going down";
-      }
-*/
       setState(() {});
     });
     super.initState();
@@ -146,9 +114,13 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
             onTap: () async {
               try {
                 await sensorsRef.set({
+                  "timestamp": DateTime.now().millisecondsSinceEpoch,
                   "rotationX": rotationXAxis,
                   "rotationY": rotationYAxis,
                   "rotationZ": rotationZAxis,
+                  "directionX": directionX,
+                  "directionY": directionY,
+                  "directionZ": directionZ,
                 });
               } catch (error) {
                 print('there has been an error $error');
