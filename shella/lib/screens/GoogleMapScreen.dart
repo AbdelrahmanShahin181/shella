@@ -85,16 +85,10 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
           ),
           Center(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(myAdress),
-                TextButton(
-                    onPressed: () async {
-                      _currentPosition = await _determinePosition();
-                      // _currentPosition = await geLatAndLong();
-                      print(_currentPosition.latitude);
-                      print(_currentPosition.longitude);
-                    },
-                    child: const Text('Locate Me')),
+
                 //Text('Latitude: ' + _currentPosition?.latitude.toString()),
 
                 _currentPosition != null
@@ -104,6 +98,28 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                     ? Text(
                         'longitude =' + _currentPosition.longitude.toString())
                     : Container(),
+                _currentPosition != null
+                    ? Text('altitude =' + _currentPosition.altitude.toString())
+                    : Container(),
+                _currentPosition != null
+                    ? Text('accuracy =' + _currentPosition.accuracy.toString())
+                    : Container(),
+
+                _currentPosition != null
+                    ? Text('speed =' + _currentPosition.speed.toString())
+                    : Container(),
+                //_currentPosition != null ? Text('speedAccuracy =' + _currentPosition.speedAccuracy.toString()) : Container(),
+                _currentPosition != null
+                    ? Text('heading =' + _currentPosition.heading.toString())
+                    : Container(),
+                TextButton(
+                    onPressed: () async {
+                      _currentPosition = await _determinePosition();
+                      // _currentPosition = await geLatAndLong();
+                      print(_currentPosition.latitude);
+                      print(_currentPosition.longitude);
+                    },
+                    child: const Text('Locate Me')),
               ],
             ),
           ),
