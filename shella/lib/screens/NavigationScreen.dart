@@ -19,7 +19,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
     GoogleMapScreen(),
   ];
 
-  void _onItemTapped(int index) {
+  void _onItemTapped(int index) async {
     setState(() {
       _selectedIndex = index;
     });

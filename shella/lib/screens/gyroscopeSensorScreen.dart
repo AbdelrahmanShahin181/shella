@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, library_private_types_in_public_api, avoid_print, file_names
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
@@ -11,63 +12,25 @@ class MovementSensorsScreen extends StatefulWidget {
 }
 
 class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
-  double x = 0, y = 0, z = 0;
-  String rotationXAxis = "none";
-  String rotationYAxis = "none";
-  String rotationZAxis = "none";
+  final database = FirebaseDatabase.instance.ref();
 
-  String directionX = "none";
-  String directionY = "none";
-  String directionZ = "none";
+  double rotationXAxis = 0, rotationYAxis = 0, rotationZAxis = 0;
+  double directionX = 0, directionY = 0, directionZ = 0;
 
   @override
   void initState() {
     gyroscopeEvents.listen((GyroscopeEvent event) {
-      //print(event);
-
-      x = event.x;
-      y = event.y;
-      z = event.z;
-
-      if (x > 0) {
-        rotationXAxis = "up and forward";
-      } else if (x < 0) {
-        rotationXAxis = "down and backward";
-      }
-      if (y > 0) {
-        rotationYAxis = "turn left";
-      } else if (y < 0) {
-        rotationYAxis = "turn right";
-      }
-      if (z < 0) {
-        rotationZAxis = "rotation z axis minus";
-      } else if (z > 0) {
-        rotationZAxis = "rotation z axis plus";
-      }
+      rotationXAxis = event.x;
+      rotationYAxis = event.y;
+      rotationZAxis = event.z;
 
       setState(() {});
     });
 
     userAccelerometerEvents.listen((event) {
-      x = event.x; // right minus left plus
-      y = event.y; // back plus front minus
-      z = event.z; // down plus up minus
-
-      if (x > 0) {
-        directionX = "going left";
-      } else if (x < 0) {
-        directionX = "going right";
-      }
-      if (y > 0) {
-        directionY = "going backward";
-      } else if (y < 0) {
-        directionY = "going forward";
-      }
-      if (z < 0) {
-        directionZ = "going up";
-      } else if (z > 0) {
-        directionZ = "going down";
-      }
+      directionX = event.x; // right minus left plus
+      directionY = event.y; // back plus front minus
+      directionZ = event.z; // down plus up minus
 
       setState(() {});
     });
@@ -76,10 +39,12 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final sensorsRef = database.child('sensors/');
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Gyroscope/Accelerometer Sensor in Flutter"),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.blue,
       ),
       body: ListView(padding: EdgeInsets.all(30), children: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -88,7 +53,7 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Text(
-            rotationXAxis,
+            rotationXAxis.toString(),
             style: TextStyle(fontSize: 15),
           ),
           Text(
@@ -96,7 +61,7 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Text(
-            rotationYAxis,
+            rotationYAxis.toString(),
             style: TextStyle(fontSize: 15),
           ),
           Text(
@@ -104,7 +69,7 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Text(
-            rotationZAxis,
+            rotationZAxis.toString(),
             style: TextStyle(fontSize: 15),
           ),
           Text(
@@ -112,7 +77,7 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Text(
-            directionX,
+            directionX.toString(),
             style: TextStyle(fontSize: 15),
           ),
           Text(
@@ -120,7 +85,7 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Text(
-            directionY,
+            directionY.toString(),
             style: TextStyle(fontSize: 15),
           ),
           Text(
@@ -128,13 +93,46 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Text(
-            directionZ,
+            directionZ.toString(),
             style: TextStyle(fontSize: 15),
+          ),
+          InkWell(
+            child: Container(
+              width: double.infinity,
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              decoration: const ShapeDecoration(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                ),
+                color: Colors.blue,
+              ),
+              child: const Text(
+                'Save to db',
+              ),
+            ),
+            onTap: () async {
+              try {
+                await sensorsRef.set({
+                  "timestamp": DateTime.now().millisecondsSinceEpoch,
+                  "rotationX": rotationXAxis,
+                  "rotationY": rotationYAxis,
+                  "rotationZ": rotationZAxis,
+                  "directionX": directionX,
+                  "directionY": directionY,
+                  "directionZ": directionZ,
+                });
+              } catch (error) {
+                print('there has been an error $error');
+              }
+            },
           )
         ]),
       ]),
     );
   }
+
+  Future createData() async {}
 }
 
 class LiveData {
