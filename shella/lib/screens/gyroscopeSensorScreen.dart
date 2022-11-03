@@ -44,7 +44,7 @@ class _MovementSensorsScreenState extends State<MovementSensorsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Gyroscope/Accelerometer Sensor in Flutter"),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.blue,
       ),
       body: ListView(padding: EdgeInsets.all(30), children: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
