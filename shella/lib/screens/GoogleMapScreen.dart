@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_typing_uninitialized_variables
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 //import 'package:geolocation/geolocation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -19,6 +20,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   //geo.Position? _currentPosition;
   String myAdress = 'My adress';
   var _currentPosition;
+  final database = FirebaseDatabase.instance.ref();
 
   Future<geo.Position> _determinePosition() async {
     bool serviceEnabled;
@@ -64,8 +66,37 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
     return await geo.Geolocator.getCurrentPosition().then((value) => value);
   }
 
+  Future sendData({required mapsRef}) async {
+    await database.child('maps/').set({
+      'latitude': _currentPosition.latitude,
+      'longitude': _currentPosition.longitude,
+      'adress': myAdress,
+    });
+  }
+
+  void sendDataToServer(mapsRef) async {
+    print("Start Sending Data");
+    try {
+      await mapsRef.set({
+        "timestamp": DateTime.now().millisecondsSinceEpoch,
+        "latitude": _currentPosition.latitude,
+        "longitude": _currentPosition.longitude,
+        "altitude": _currentPosition.altitude,
+        "accuracy": _currentPosition.accuracy,
+        "speed": _currentPosition.speed,
+        "speedAccuracy": _currentPosition.speedAccuracy,
+        "heading": _currentPosition.heading,
+        "adress": myAdress,
+      });
+      print("Data send successfully");
+    } catch (error) {
+      print('there has been an error $error');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final mapsRef = database.child('map/');
     return Scaffold(
       appBar: AppBar(
         title: const Text('Google Maps'),
@@ -92,32 +123,30 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                 //Text('Latitude: ' + _currentPosition?.latitude.toString()),
 
                 _currentPosition != null
-                    ? Text('latitude =' + _currentPosition.latitude.toString())
+                    ? Text('latitude =${_currentPosition.latitude}')
                     : Container(),
                 _currentPosition != null
-                    ? Text(
-                        'longitude =' + _currentPosition.longitude.toString())
+                    ? Text('longitude =${_currentPosition.longitude}')
                     : Container(),
                 _currentPosition != null
-                    ? Text('altitude =' + _currentPosition.altitude.toString())
+                    ? Text('altitude =${_currentPosition.altitude}')
                     : Container(),
                 _currentPosition != null
-                    ? Text('accuracy =' + _currentPosition.accuracy.toString())
+                    ? Text('accuracy =${_currentPosition.accuracy}')
                     : Container(),
 
                 _currentPosition != null
-                    ? Text('speed =' + _currentPosition.speed.toString())
+                    ? Text('speed =${_currentPosition.speed}')
                     : Container(),
                 //_currentPosition != null ? Text('speedAccuracy =' + _currentPosition.speedAccuracy.toString()) : Container(),
                 _currentPosition != null
-                    ? Text('heading =' + _currentPosition.heading.toString())
+                    ? Text('heading =${_currentPosition.heading}')
                     : Container(),
                 TextButton(
                     onPressed: () async {
+                      print("Button Pressed");
                       _currentPosition = await _determinePosition();
-                      // _currentPosition = await geLatAndLong();
-                      print(_currentPosition.latitude);
-                      print(_currentPosition.longitude);
+                      sendDataToServer(mapsRef);
                     },
                     child: const Text('Locate Me')),
               ],
